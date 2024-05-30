@@ -1,0 +1,18 @@
+{
+    "13": {
+        "name": "Steingarten",
+        "status": 0
+    },
+    "16": {
+        "name": "Terrassenbeete und Gartenhaus",
+        "status": 0
+    },
+    "19": {
+        "name": "Rasen unterer Garten",
+        "status": 0
+    },
+    "20": {
+        "name": "Teich",
+        "status": 1
+    }
+}

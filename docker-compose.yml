@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  webapi:
+    image: mirkowust/wateringpi:latest
+    container_name: webapi
+    devices:
+      - /dev/gpiomem
+    logging:
+       options:
+         max-size: "1m"
+         max-file: "1"
+    restart: unless-stopped
+    networks:
+      - default
+    ports:
+      - "8080:8080/tcp" # http
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "$PWD/settings:/usr/src/app/settings"
+      - "$PWD/logs:/usr/src/app/logs"
+      - "$PWD/html:/usr/src/app/web"
+    environment:
+      - PIHOSTNAME
+
+  webapp:
+    image: httpd:latest
+    container_name: webapp
+    restart: unless-stopped
+    networks:
+      - default
+    logging:
+       options:
+         max-size: "1m"
+         max-file: "1"
+    ports:
+    - '80:80'
+    volumes:
+    - "$PWD/html:/usr/local/apache2/htdocs"
